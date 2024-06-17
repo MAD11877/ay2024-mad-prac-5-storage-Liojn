@@ -19,6 +19,6 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "madpratical5"
+rootProject.name = "madpractical5"
 include(":app")
  
