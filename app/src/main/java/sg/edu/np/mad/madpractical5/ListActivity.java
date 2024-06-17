@@ -22,6 +22,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 import java.util.Random;
 
+import sg.edu.np.mad.madpratical5.R;
+
 public class ListActivity extends AppCompatActivity{
 
 

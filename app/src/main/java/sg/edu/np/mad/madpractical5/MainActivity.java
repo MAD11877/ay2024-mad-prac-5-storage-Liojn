@@ -15,6 +15,8 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
+import sg.edu.np.mad.madpratical5.R;
+
 public class MainActivity extends AppCompatActivity {
 
     @Override

@@ -21,6 +21,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 import java.util.List;
 
+import sg.edu.np.mad.madpratical5.R;
+
 public class UserAdapter extends RecyclerView.Adapter<UserViewHolder> {
     private ArrayList<User> data;
     private ListActivity context;

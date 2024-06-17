@@ -7,6 +7,8 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import sg.edu.np.mad.madpratical5.R;
+
 public class UserViewHolder extends RecyclerView.ViewHolder {
 
     TextView txt;
