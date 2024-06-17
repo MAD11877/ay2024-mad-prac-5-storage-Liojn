@@ -45,6 +45,11 @@ public class UserAdapter extends RecyclerView.Adapter<UserViewHolder> {
         return new UserViewHolder(item);
     }
 
+    @Override
+    public void onBindViewHolder(@NonNull UserViewHolder holder, int position) {
+
+    }
+
     //@Override
     public void onBindViewHolder(@NonNull UserViewHolder holder) {
 //        String s = data.get(position).name + data.get(position).description;
