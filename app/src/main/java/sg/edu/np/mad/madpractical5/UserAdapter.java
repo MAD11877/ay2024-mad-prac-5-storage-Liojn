@@ -46,11 +46,12 @@ public class UserAdapter extends RecyclerView.Adapter<UserViewHolder> {
     }
 
     //@Override
-    public void onBindViewHolder(@NonNull UserViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull UserViewHolder holder) {
 //        String s = data.get(position).name + data.get(position).description;
 //        holder.txt.setText(s);
 //        DBHandler dbHandler = new DBHandler(context,null,null,1);
 //        data = dbHandler.getUsers();
+        int position = holder.getAdapterPosition();
         User currentUser = data.get(position);
         holder.nameTextView.setText(currentUser.getName());
         holder.txt.setText(currentUser.getDescription());
