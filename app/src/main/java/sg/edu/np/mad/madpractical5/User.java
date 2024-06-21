@@ -1,80 +1,26 @@
 package sg.edu.np.mad.madpractical5;
 
 public class User {
-//    public String name;
-//    public String description;
-//    public int id;
-//    public boolean followed;
-//
-//    public User(String n, String d, int i, boolean f)
-//    {
-//        this.name = n;
-//        this.description = d;
-//        this.id = i;
-//        this.followed = f;
-//
-//    }
+    public String name;
+    public String description;
+    public int id;
+    public boolean followed;
 
-    private String name;
-    private String description;
-    private int id;
-    private boolean followed;
+    public void setName(String username) {this.name = username;}
+    public void setDescription(String description) {this.description = description;}
+    public void setId(int id) {this.id = id;}
+    public void setFollowed(Boolean followed) {this.followed = followed;}
+    public String getName() {return name;}
+    public String getDescription() {return description;}
+    public int setId() {return id;}
+    public Boolean getFollowed() {return followed;}
 
-    public void setName(String n)
-    {
-        name = n;
+    public User(){}
+
+    public User(String name, String description, int id, boolean followed) {
+        this.name = name;
+        this.description = description;
+        this.id = id;
+        this.followed = followed;
     }
-    public String getName()
-    {
-        return name;
-    }
-
-    public void setDescription(String d)
-    {
-        description = d;
-    }
-    public String getDescription()
-    {
-        return description;
-    }
-
-    public void setId(int i)
-    {
-        id = i;
-    }
-    public int getId()
-    {
-        return id;
-    }
-
-    public void setFollowed(boolean f)
-    {
-        followed = f;
-    }
-    public boolean getFollowed()
-    {
-        return followed;
-    }
-
-    public User(String n, String d, int i, boolean f)
-    {
-        name = n;
-        description = d;
-        id = i;
-        followed = f;
-    }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 }

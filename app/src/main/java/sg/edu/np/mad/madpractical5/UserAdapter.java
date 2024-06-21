@@ -1,121 +1,77 @@
 package sg.edu.np.mad.madpractical5;
 
-import android.app.Activity;
-import android.app.AlertDialog;
-import android.content.BroadcastReceiver;
-import android.content.Context;
-import android.content.DialogInterface;
+import static android.content.ContentValues.TAG;
+
 import android.content.Intent;
-import android.content.IntentFilter;
 import android.os.Bundle;
-import android.util.Xml;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 
-import androidx.annotation.NonNull;
-import androidx.localbroadcastmanager.content.LocalBroadcastManager;
+import androidx.appcompat.app.AlertDialog;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
-import java.util.List;
-
-import sg.edu.np.mad.madpratical5.R;
 
 public class UserAdapter extends RecyclerView.Adapter<UserViewHolder> {
-    private ArrayList<User> data;
-    private ListActivity context;
-
-    public UserAdapter(ArrayList<User> input, ListActivity activity)
-    {
-
-        this.data = input;
-        this.context = activity;
+    private ArrayList<User> list_objects;
+    // private ListActivity activity;
+    public UserAdapter(ArrayList<User> list_objects, ListActivity activity){
+        this.list_objects = list_objects;
+        // this.activity = activity;
     }
-
-    @NonNull
-    @Override
-    public UserViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View item = LayoutInflater.from(parent.getContext()).inflate(
-                //android.R.layout.simple_list_item_1,
-                R.layout.custom_activity_list,
-                parent,
-                false);
-        return new UserViewHolder(item);
+    //Method to create a view holder for a username.
+    public UserViewHolder onCreateViewHolder(ViewGroup parent, int viewType){
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.custom_activity_list, parent, false);
+        UserViewHolder holder = new UserViewHolder(view);
+        return holder;
     }
-
-    @Override
-    public void onBindViewHolder(@NonNull UserViewHolder holder, int position) {
-
-    }
-
-    //@Override
-    public void onBindViewHolder(@NonNull UserViewHolder holder) {
-//        String s = data.get(position).name + data.get(position).description;
-//        holder.txt.setText(s);
-//        DBHandler dbHandler = new DBHandler(context,null,null,1);
-//        data = dbHandler.getUsers();
-        int position = holder.getAdapterPosition();
-        User currentUser = data.get(position);
-        holder.nameTextView.setText(currentUser.getName());
-        holder.txt.setText(currentUser.getDescription());
-        char[] chars = (currentUser.getName()).toCharArray();
-        if(chars[chars.length-1] != '7')
-        {
-            ImageView bigImg = holder.itemView.findViewById(R.id.bigImg);
-            bigImg.setVisibility(View.GONE);
-
-        }
-        else
-        {
-            ImageView bigImg = holder.itemView.findViewById(R.id.bigImg);
-            bigImg.setVisibility(View.VISIBLE);
-        }
-
-        ImageView smlImg = holder.itemView.findViewById(R.id.imageView15);
-        smlImg.setOnClickListener(new View.OnClickListener() {
+    //Method to bind username to a view holder.
+    public void onBindViewHolder (UserViewHolder holder, int position) {
+        //Get position of a username
+        User list_items = list_objects.get(position);
+        //Set username to the view holder based on custom_activity_list.xml
+        holder.name.setText(list_items.getName());
+        //Set description to the view holder based on custom_activity_list.xml
+        holder.description.setText(list_items.getDescription());
+        //Configure setOnClickListener() for the small image on the view holder based on custom_activity_list.xml
+        holder.smallImage.setOnClickListener(new View.OnClickListener(){
             @Override
-            public void onClick(View v) {
-                //Creating alert dialogue
+            public void onClick(View v){
+                // Create AlertDialog inside onClick
                 AlertDialog.Builder builder = new AlertDialog.Builder(v.getContext());
                 builder.setTitle("Profile");
-                builder.setMessage(currentUser.getName());
+                builder.setMessage(list_items.getName());
                 builder.setCancelable(true);
-                int position1 = position;
-                builder.setPositiveButton("View", new DialogInterface.OnClickListener(){
-                    public void onClick(DialogInterface dialog, int id){
-//                        data = dbHandler.getUsers();
-//                        User currentUser = data.get(position);
-                        //Intent
-                        Intent activity = new Intent(v.getContext(),MainActivity.class);
-                        Bundle extras = new Bundle();
-                        extras.putString("Name", currentUser.getName());
-                        extras.putString("Description", currentUser.getDescription());
-                        extras.putBoolean("Followed", currentUser.getFollowed());
-                        extras.putInt("Id", currentUser.getId());
-                        extras.putInt("Position",position1);
-                        activity.putExtras(extras);
-                        context.startActivity(activity);
-                    }
-                });
-                builder.setNegativeButton("Close", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                    }
+                builder.setPositiveButton("VIEW", (dialog, which) -> {
+                    Intent MainActivity = new Intent(v.getContext(), MainActivity.class);
 
+                    Bundle extras = new Bundle();
+                    extras.putString("Name", list_items.getName());
+                    extras.putString("Description" , list_items.getDescription());
+                    extras.putBoolean("Followed" , list_items.getFollowed());
+
+                    MainActivity.putExtras(extras);
+                    v.getContext().startActivity(MainActivity);
+                });
+                builder.setNegativeButton("CLOSE", (dialog, which) -> {
 
                 });
+
                 AlertDialog alert = builder.create();
                 alert.show();
-
+                Log.i(TAG, "Alert created");
             }
         });
-
+        //Check if the last digit of the name is 7
+        String name = list_items.getName();
+        if (name.charAt(name.length()-1) == '7'){
+            holder.bigImage.setVisibility(View.VISIBLE);
+        } else {
+            holder.bigImage.setVisibility(View.GONE);
+        }
     }
 
-    @Override
-    public int getItemCount() {
-        return data.size();
-    }
+    public int getItemCount() {return list_objects.size();}
 }
